@@ -1,4 +1,4 @@
-# Web Starter Template for HTMX + Alpin Js + ASP.NET Core Razor Pages
+# Web Starter Template for HTMX + Alpine Js + ASP.NET Core Razor Pages
 
 This is a simple starter template that can be used on new projects to avoid writing common auth related code.
 
