@@ -1,0 +1,33 @@
+@model LoginModel
+
+<div id="loginContainer">
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+  <p class="error-summary">@Model.ErrorMessage</p>
+}
+<div hx-disinherit="hx-select hx-target hx-swap">
+<form hx-post="/login" hx-target="#loginContainer" asp-route="Login" method="post" autocomplete="off" class="flex-col">
+  <label>@Localizer["Username"] <span asp-validation-for="Cmd.UserName" class="error"></span></label>
+  <input asp-for="Cmd.UserName" type="text" placeholder="@Localizer["Username"]">
+
+  <label>@Localizer["Password"] <span asp-validation-for="Cmd.Password" class="error"></span></label>
+  <div x-data="{showPassword: false}" class="password-field">
+    <input asp-for="Cmd.Password" :type="showPassword ? 'text' : 'password'" placeholder="@Localizer["Password"]">
+    <img x-on:click="showPassword = !showPassword" :src="'/images/svg/' + (showPassword ? 'hide' : 'show') + '.svg'">
+  </div>
+
+  @if (Model.TfaRequired)
+  {
+    <label>@Localizer["TfaCode"] <span asp-validation-for="Cmd.TfaCode" class="error"></span></label>
+    <input type="text" asp-for="Cmd.TfaCode" autocomplete="off">
+  }
+
+  <label class="terms-label">@Localizer["loginForm.terms"] <a href="/terms" target="_blank">@Localizer["TermsofService"]</a></label>
+
+  <button class="primary modal-button" type="submit">@Localizer["Login"]</button>
+
+  <p class="link-button"><a hx-get="/forgotpassword" hx-target="#modal-content">@Localizer["ForgotPassword"]?</a></p>
+  <p class="link-button">@Localizer["DontHaveAccount"] <a hx-get="/register" hx-target="#modal-content">@Localizer["SignUp"]</a></p>
+</form>
+</div>
+</div>

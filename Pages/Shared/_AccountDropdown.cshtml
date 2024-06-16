@@ -1,0 +1,35 @@
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<User> UserManager
+@{
+  var user  = await UserManager.GetUserAsync(User);
+}
+
+<div x-data="{showAccountDropdown: false}" x-on:click.outside="showAccountDropdown = false" class="relative mr-6">
+  <div x-on:click="showAccountDropdown = !showAccountDropdown" class="avatar account-avatar sm">
+    <img src="/images/avatar.jpg">
+  </div>
+  <div :class="{ open: showAccountDropdown }" class="account-dropdown">
+    <div class="user-details">
+      <div class="avatar account-avatar lg">
+        <img src="/images/avatar.jpg">
+      </div>
+      <div class="text-container">
+        <p class="name">@user.UserName</p>
+        <p class="email">@(string.IsNullOrEmpty(user.Email) ? Localizer["NoEmailFound"] : user.Email)</p>
+      </div>
+    </div>
+    <div class="links-section">
+      <a href="/sessions">
+        @Localizer["Account"]
+      </a>
+    </div>
+    @* TODO not sure why we need this disinherit as it's the same as the select on body. It's not needed on the form on sessions page *@
+    <div class="links-section" hx-disinherit="hx-select"> 
+      <form hx-post="/signout" hx-select=".main-container" hx-push-url="true" asp-route="SignOut" method="post">
+        <button>
+          @Localizer["Logout"]
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

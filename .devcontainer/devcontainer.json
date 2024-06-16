@@ -1,0 +1,23 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/dotnet-postgres
+{
+    "name": "Web Starter",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "app",
+	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+	"mounts": [
+        "source=${localWorkspaceFolderBasename}-bin,target=${containerWorkspaceFolder}/bin,type=volume",
+        "source=${localWorkspaceFolderBasename}-obj,target=${containerWorkspaceFolder}/obj,type=volume"
+    ],
+    
+    "postCreateCommand": "(sudo chown vscode obj); (sudo chown vscode bin); (dotnet tool install --global dotnet-ef); (dotnet restore)",
+
+    "remoteUser": "vscode",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-dotnettools.csharp"
+            ]
+        }
+    }
+}

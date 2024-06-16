@@ -1,0 +1,9 @@
+@model string
+
+<section class="hero hero-account">
+  <h1>@Localizer["Account"]</h1>
+</section>
+<div class="justify-start account-nav">
+  <a href="/security" class="tab @(Model == "security" ? "active" : "")">@Localizer["Security"]</a>
+  <a href="/sessions" class="tab @(Model == "sessions" ? "active" : "")">@Localizer["Sessions"]</a>
+</div>

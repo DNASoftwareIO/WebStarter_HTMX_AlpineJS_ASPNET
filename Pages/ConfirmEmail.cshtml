@@ -1,0 +1,15 @@
+@page "/confirm-email"
+@model ConfirmEmailModel
+
+<div class="card flex-col-centerv mt-33">
+  @if (Model.ShowSuccess)
+  {
+    <h3 class="success">@Localizer["EmailAddressConfirmed"]</h3>
+  }
+  else
+  {
+    <h3 class="error">@Localizer["ErrorConfirmingEmailAddress"]</h3>
+    <p>@Localizer["EmailErrorDetail"]</p>
+  }
+  <a href="/">@Localizer["BackToHome"]</a>
+</div>

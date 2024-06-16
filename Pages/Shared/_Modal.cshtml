@@ -1,0 +1,6 @@
+<div style="display: none;" x-show="showModal" x-on:keydown.escape.window="showModal = false" class="modal-mask" aria-modal="true" role="dialog" tabindex="-1">
+  <div class="modal-container" x-on:click.outside="showModal = false">
+    <div class="modal-close-button" x-on:click="showModal = false">X</div>
+    <div id="modal-content"></div>
+  </div>
+</div>

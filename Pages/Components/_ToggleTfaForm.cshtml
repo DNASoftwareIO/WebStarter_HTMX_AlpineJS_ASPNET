@@ -1,0 +1,42 @@
+@model SecurityModel
+
+<div id="toggleTfaContainer" class="card" hx-disinherit="hx-select hx-target hx-swap">
+    <h3>@Localizer["TwoFactorAuth"]</h3>
+    @if (Model.ToggleTfaSuccess)
+    {
+      <div class="success-alert" style="padding: 0;">
+        <p>@Localizer["TfaChangedSuccess"]</p>
+      </div>
+    }
+    @if (!string.IsNullOrEmpty(Model.TfaErrorMessage))
+    {
+      <p class="error-summary">@Model.TfaErrorMessage</p>
+    }
+    <form hx-post="/security?handler=ToggleTfa" hx-target="#toggleTfaContainer" hx-swap="outerHTML show:no-scroll" method="post" autocomplete="off">
+      <div class="tfa-container mb-10">
+        @if (!Model.TfaEnabled)
+        {
+          <div class="qrcode-container">
+            <img src="@Model.QrCodeData" width="240"/>
+          </div>
+        }
+        <div>
+          @if (!Model.TfaEnabled)
+          {
+            <div>
+              <label>@Localizer["BackupCode"]</label>
+              <input value="@Model.TfaKey" type="text" disabled/>
+            </div>
+          }
+          <div>
+            <label>@Localizer["TfaCode"] <span asp-validation-for="ToggleTfaCmd.TfaCode" class="error"></span></label>
+            <input asp-for="ToggleTfaCmd.TfaCode" type="text">
+          </div>
+        </div>
+
+      </div>
+      <div class="justify-end mt-33">
+        <button type="submit" class="primary">@(Model.TfaEnabled ? Localizer["DisableTfa"] : Localizer["EnableTfa"])</button>
+      </div>
+    </form>
+  </div>

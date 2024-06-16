@@ -1,0 +1,10 @@
+@page
+@{
+  var pageName  = "security";
+}
+@model SecurityModel
+<partial name="_AccountNav" model="pageName"/>
+<div class="security-container">
+  <partial name="~/Pages/Components/_ChangePasswordForm.cshtml" model="Model"/>
+  <partial name="~/Pages/Components/_ToggleTfaForm.cshtml" model="Model"/>
+</div>

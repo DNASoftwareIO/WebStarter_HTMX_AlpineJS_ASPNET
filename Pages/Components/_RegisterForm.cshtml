@@ -1,0 +1,36 @@
+@model RegisterModel
+
+<div id="registerContainer">
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+  <p class="error-summary">@Model.ErrorMessage</p>
+}
+<div hx-disinherit="hx-select hx-target hx-swap">
+<form hx-post="/register" hx-target="#registerContainer" asp-route="Register" method="post" autocomplete="off" class="flex-col">
+  <label>@Localizer["Username"] <span asp-validation-for="Cmd.UserName" class="error"></span></label>
+  <input asp-for="Cmd.UserName" type="text" placeholder="@Localizer["Username"]">
+
+  <label>@Localizer["EmailAddress"] <span asp-validation-for="Cmd.Email" class="error"></span></label>
+  <input asp-for="Cmd.Email" type="text" placeholder="@Localizer["EmailAddress"]">
+
+  <label>@Localizer["Password"] <span asp-validation-for="Cmd.Password" class="error"></span></label>
+  <div x-data="{showPassword: false}" class="password-field">
+    <input asp-for="Cmd.Password" :type="showPassword ? 'text' : 'password'" placeholder="@Localizer["Password"]">
+    <img x-on:click="showPassword = !showPassword" :src="'/images/svg/' + (showPassword ? 'hide' : 'show') + '.svg'">
+  </div>
+
+  <label>@Localizer["PromoCode"] <span asp-validation-for="Cmd.PromoCode" class="error"></span></label>
+  <input asp-for="Cmd.PromoCode" type="text" placeholder="@Localizer["PromoCode"]">
+
+  <span asp-validation-for="TermsChecked" class="error"></span>
+  <label class="terms-label">
+    <input type="checkbox" asp-for="TermsChecked">
+    @Localizer["registerForm.terms"] <a href="/terms" target="_blank">@Localizer["GeneralTermsandConditions"]</a>
+  </label>
+
+  <button class="primary modal-button" type="submit">@Localizer["SignUp"]</button>
+
+  <p class="link-button">@Localizer["AlreadyHaveAccount"] <a hx-get="/login" hx-target="#modal-content">@Localizer["Login2"]</a></p>
+</form>
+</div>
+</div>

@@ -1,0 +1,30 @@
+.qrcode-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  /* changing from white can make the qr code scanning not work */
+  height: 15.65rem;
+  width: 15.65rem;
+  border-radius: 10px;
+
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.tfa-container {
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 64em) {
+  .tfa-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    column-gap: 1.5rem;
+  }
+
+  .qrcode-container {
+    margin-bottom: 0px;
+  }
+}

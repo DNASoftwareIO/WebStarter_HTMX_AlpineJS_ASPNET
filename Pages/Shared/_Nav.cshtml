@@ -1,0 +1,14 @@
+<div id="nav" class="nav" hx-swap-oob="true">
+  <a href="/">Logo</a>
+  @if (User.Identity.IsAuthenticated)
+  {
+    <partial name="_AccountDropdown"/>
+  }
+  else
+  {
+    <div hx-disinherit="hx-target hx-select hx-swap" class="buttons-container" >
+      <button hx-get="/login" hx-target="#modal-content" x-on:htmx:after-on-load="showModal = true" class="secondary">@Localizer["Login"]</button>
+      <button hx-get="/register" hx-target="#modal-content" x-on:htmx:after-on-load="showModal = true" class="primary">@Localizer["Register"]</button>
+    </div>
+  }
+</div>

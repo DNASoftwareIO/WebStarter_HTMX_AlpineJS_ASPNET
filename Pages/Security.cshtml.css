@@ -1,0 +1,14 @@
+.security-container {
+	display: flex;
+	flex-direction: column;
+	gap: 1.8rem;
+  }
+  
+
+  @media screen and (min-width: 64em) {
+	.security-container {
+	  display: grid;
+	  grid-template-columns: 1fr 1fr;
+	  column-gap: 1.5rem;
+	}
+  }

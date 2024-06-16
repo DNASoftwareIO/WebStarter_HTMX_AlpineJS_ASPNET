@@ -1,0 +1,72 @@
+@page
+@{
+  var pageName  = "sessions";
+}
+@model SessionsModel
+<partial name="_AccountNav" model="pageName"/>
+<div class="card justify-between-centerv mb-10">
+  <p class="font-xl">@Localizer["LogoutAllSessions"]</p>
+  <form hx-post="/signout?handler=All" hx-push-url="true" method="post">
+    <button class="primary logout-all-button">@Localizer["Logout2"]</button>
+  </form>
+</div>
+<div class="card hide-mobile">
+  <table>
+    <thead>
+    <tr>
+      <th>@Localizer["Date"]</th>
+      <th>@Localizer["IpAddress"]</th>
+      <th>@Localizer["Device"]</th>
+      <th>@Localizer["Country"]</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var session in Model.Sessions)
+    {
+      <tr>
+        <td>@session.CreatedAt.ToString("dd/MM/yyyy HH:mm")</td>
+        <td>@session.IpAddress</td>
+        <td>@session.UserAgent</td>
+        <td>@session.Country</td>
+        <td>
+          <button hx-post="/signout?handler=ById&id=@session.Id" class="primary xs" disabled="@(session.RefreshToken.ToString() == Model.RefreshToken)">@(session.RefreshToken.ToString() == Model.RefreshToken ? Localizer["Current"] : Localizer["Logout"])</button>
+        </td>
+      </tr>
+    }
+    </tbody>
+  </table>
+</div>
+
+<h3 class="hide-desktop mb-1" style="padding-left: 12px;">@Localizer["Sessions"]</h3>
+@foreach (var session in Model.Sessions)
+{
+  <div class="card hide-desktop mb-1">
+    <table>
+      <tbody>
+      <tr>
+        <th width="50%">@Localizer["Date"]</th>
+        <td width="50%">@session.CreatedAt.ToString("dd/MM/yyyy HH:mm")</td>
+      </tr>
+      <tr>
+        <th>@Localizer["IpAddress"]</th>
+        <td>@session.IpAddress</td>
+      </tr>
+      <tr>
+        <th>@Localizer["Device"]</th>
+        <td>@session.UserAgent</td>
+      </tr>
+      <tr>
+        <th>@Localizer["Country"]</th>
+        <td>@session.Country</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
+          <button hx-post="/signout?handler=ById&id=@session.Id" class="primary xs" disabled="@(session.RefreshToken.ToString() == Model.RefreshToken)">@(session.RefreshToken.ToString() == Model.RefreshToken ? Localizer["Current"] : Localizer["Logout"])</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+}
