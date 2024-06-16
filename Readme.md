@@ -6,7 +6,7 @@ The project uses JWT Authentication with refresh tokens.
 
 The template provides UI for the following:
 - register / login 
-- sessions using jwt + refresh tokens (auto refresh with axios interceptor)
+- sessions using jwt + refresh tokens (auto refresh)
 - password reset via email link (email sending uses MailKit)
 - account dashboard with change password and session management
 - 2fa with Google Authenticator. Login and change password can be protected with 2fa
@@ -28,7 +28,7 @@ This starter template provides you with only the basic code you need to handle a
 It is simple to find and edit any part of the code you need to to suit your own project needs and also customise the UI to make it look however you like.
 We don't use any CSS framework so you can easily edit the existing CSS code or add your own framework of choice.
 
-The bulk of the actual auth code is provided by ASP.NET Core identity. We are just providing some extra, common functionality on top.
+The bulk of the actual auth code is provided by ASP.NET Core Identity. We are just providing some extra, common functionality on top.
 
 # Getting Started
 To launch the application it is recommended to use Dev Containers. There is a dockerfile for a dev container included in the repo.
