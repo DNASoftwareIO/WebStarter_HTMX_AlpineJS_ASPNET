@@ -45,7 +45,7 @@ To launch the project run:
 This project is adapted from real code we have used and tested in production on multiple projects. 
 
 There are a few things you MUST do before using this code in any production project.
-- Change the JWTSettings in appsettings.json. Especially the Key setting. This should be a unique string of at least 20 characters. If you do not change this you can be hacked easily.
+- Change the JWTSettings in appsettings.json. Especially the Key setting. This should be a unique string of at least 32 characters. If you do not change this you can be hacked easily.
 - To send emails you must add your own SMTP providers settings to appsettings.json and set SendingEnabled to true.
 
 # Coming soon
