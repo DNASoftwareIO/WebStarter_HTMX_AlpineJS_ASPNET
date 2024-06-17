@@ -1,3 +1,5 @@
+// Code taken from https://codewithmukesh.com/blog/json-based-localization-in-aspnet-core/
+
 using System.Globalization;
 using Microsoft.Extensions.Localization;
 using Newtonsoft.Json;
