@@ -18,7 +18,7 @@ public class ResetPasswordModel(UserManager<User> userManager, ApplicationDbCont
 
   public ActionResult OnGet([FromQuery] string token, [FromQuery] string email)
   {
-    Cmd = new ResetPasswordCommand { Email = email, Token = token };
+    Cmd = new ResetPasswordCommand { Email = email, Token = token, NewPassword = "", ConfirmPassword = "" };
     return Page();
   }
 
