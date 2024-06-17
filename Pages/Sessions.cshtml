@@ -30,7 +30,9 @@
         <td>@session.UserAgent</td>
         <td>@session.Country</td>
         <td>
-          <button hx-post="/signout?handler=ById&id=@session.Id" class="primary xs" disabled="@(session.RefreshToken.ToString() == Model.RefreshToken)">@(session.RefreshToken.ToString() == Model.RefreshToken ? Localizer["Current"] : Localizer["Logout"])</button>
+          <form hx-post="/signout?handler=ById&id=@session.Id" method="post">
+            <button class="primary xs" disabled="@(session.RefreshToken.ToString() == Model.RefreshToken)">@(session.RefreshToken.ToString() == Model.RefreshToken ? Localizer["Current"] : Localizer["Logout"])</button>
+          </form>
         </td>
       </tr>
     }
@@ -63,7 +65,9 @@
       <tr>
         <td></td>
         <td>
-          <button hx-post="/signout?handler=ById&id=@session.Id" class="primary xs" disabled="@(session.RefreshToken.ToString() == Model.RefreshToken)">@(session.RefreshToken.ToString() == Model.RefreshToken ? Localizer["Current"] : Localizer["Logout"])</button>
+          <form hx-post="/signout?handler=ById&id=@session.Id" method="post">
+            <button class="primary xs" disabled="@(session.RefreshToken.ToString() == Model.RefreshToken)">@(session.RefreshToken.ToString() == Model.RefreshToken ? Localizer["Current"] : Localizer["Logout"])</button>
+          </form>
         </td>
       </tr>
       </tbody>
