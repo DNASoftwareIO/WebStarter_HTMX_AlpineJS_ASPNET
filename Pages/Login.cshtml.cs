@@ -88,7 +88,7 @@ public class LoginModel(ILogger<LoginModel> logger, UserManager<User> userManage
     };
     Response.Cookies.Append("accessToken", jwt, cookieOptions);
     Response.Cookies.Append("refreshToken", session.RefreshToken.ToString(), cookieOptions);
-    Response.Headers.Append("HX-Trigger", "close-modal");
+    Response.Headers.Append("HX-Trigger", "close-login-modal");
 
     return Request.IsHtmx() ? Partial("~/Pages/Shared/_Nav.cshtml") : Page();
   }

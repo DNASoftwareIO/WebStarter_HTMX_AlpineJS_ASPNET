@@ -25,8 +25,15 @@
 
 <script>
     window.addEventListener("load", function () {
-      document.body.addEventListener("close-modal", function () {
+      document.body.addEventListener("close-login-modal", function () {
         document.getElementsByTagName("BODY")[0]._x_dataStack[0].$data.showModal = false;
+
+        /// TODO 
+        // couldn't find any way to make logout work after login without a full page refresh using all standard asp.net methods.
+        // The problem is with the anti forgery token.
+        // maybe we can try having htmx do a full page swap if login success and swap only the form on error?
+    
+        window.location.reload();
       });
     });
   </script>
