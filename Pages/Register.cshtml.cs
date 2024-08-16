@@ -86,7 +86,7 @@ public class RegisterModel(UserManager<User> userManager, SignInManager<User> si
     };
     Response.Cookies.Append("accessToken", jwt, cookieOptions);
     Response.Cookies.Append("refreshToken", session.RefreshToken.ToString(), cookieOptions);
-    Response.Headers.Append("HX-Trigger", "close-modal");
+    Response.Headers.Append("HX-Trigger", "close-auth-modal");
 
     await _emailService.SendEmailConfirmationToken(user);
 
