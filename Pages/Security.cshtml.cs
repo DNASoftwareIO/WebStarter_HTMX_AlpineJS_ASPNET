@@ -9,10 +9,9 @@ using QRCoder;
 namespace DNA.Pages;
 
 [Authorize]
-public class SecurityModel(UserManager<User> userManager, ApplicationDbContext context, IConfiguration configuration) : PageModel
+public class SecurityModel(UserManager<User> userManager, IConfiguration configuration) : PageModel
 {
   private readonly UserManager<User> _userManager = userManager;
-  private readonly ApplicationDbContext _context = context;
   private readonly IConfiguration _configuration = configuration;
   public bool ChangePasswordSuccess { get; set; }
   public string? PasswordErrorMessage { get; set; }
@@ -116,8 +115,6 @@ public class SecurityModel(UserManager<User> userManager, ApplicationDbContext c
       return Request.IsHtmx() ? Partial("~/Pages/Components/_ToggleTfaForm.cshtml", this) : Page();
     }
 
-    await _context.SaveChangesAsync();
-
     ModelState.Clear();
 
     await SetQrData();
@@ -173,8 +170,6 @@ public class SecurityModel(UserManager<User> userManager, ApplicationDbContext c
       PasswordErrorMessage = "Error changing password.";
       return Request.IsHtmx() ? Partial("~/Pages/Components/_ChangePasswordForm.cshtml", this) : Page();
     }
-
-    await _context.SaveChangesAsync();
 
     ModelState.Clear();
     ChangePasswordSuccess = true;
