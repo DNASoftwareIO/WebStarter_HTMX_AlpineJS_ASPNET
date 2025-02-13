@@ -67,11 +67,12 @@ public class SecurityModel(UserManager<User> userManager, ApplicationDbContext c
         unformattedKey = await _userManager.GetAuthenticatorKeyAsync(user);
       }
 
-      TfaKey = FormatTfaKey(unformattedKey);
+      
       var authenticatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}";
 
-      var r = string.Format(authenticatorUriFormat, _configuration["WebClientUrl"], user.UserName, TfaKey);
+      var r = string.Format(authenticatorUriFormat, _configuration["WebClientUrl"], user.UserName, unformattedKey);
       QrCodeData = GenerateQrCode(r);
+      TfaKey = FormatTfaKey(unformattedKey);
     }
 
     TfaEnabled = user.TwoFactorEnabled;
